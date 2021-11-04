@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter.messagebox import *
+from tkinter import colorchooser, filedialog
 
 # класс Paint
 class Paint(Frame):
@@ -26,11 +27,14 @@ class Paint(Frame):
 
     def set_color(self, new_color):
         self.color = new_color
-
         # Изменение размера кисти
 
     def set_brush_size(self, new_size):
         self.brush_size = new_size
+
+    def call_color_picker(self):
+        color_code = colorchooser.askcolor(title="Choose color")
+        self.color = color_code[1]
 
     def setUI(self):
         # Устанавливаем название окна
@@ -61,62 +65,65 @@ class Paint(Frame):
         color_lab.grid(row=0, column=0, padx=6)
 
         # создание кнопки: установка текста кнопки, задание ширины кнопки (10 символов)
-        gold_btn = Button(self, text="Золотой", width=10, command=lambda: self.set_color("gold"))
+        gold_btn = Button(self, text="Золотой", bg="gold", width=10, command=lambda: self.set_color("gold"))
 
         # устанавливаем кнопку в первый ряд, вторая колонка
         gold_btn.grid(row=0, column=1)
 
         # по аналогии создаем остальные кнопки
-        green_btn = Button(self, text="Зеленый", width=10, command=lambda: self.set_color("green"))
+        green_btn = Button(self, text="Зеленый", bg="green", width=10, command=lambda: self.set_color("green"))
         green_btn.grid(row=0, column=2)
 
-        blue_btn = Button(self, text="Синий", width=10, command=lambda: self.set_color("blue"))
+        blue_btn = Button(self, text="Синий", bg="blue", width=10, command=lambda: self.set_color("blue"))
         blue_btn.grid(row=0, column=3)
 
-        black_btn = Button(self, text="черный", width=10, command=lambda: self.set_color("black"))
+        black_btn = Button(self, text="Красный", bg="red", width=10, command=lambda: self.set_color("red"))
         black_btn.grid(row=0, column=4)
 
-        white_btn = Button(self, text="Белый", width=10, command=lambda: self.set_color("white"))
+        white_btn = Button(self, text="Белый", bg="white", width=10, command=lambda: self.set_color("white"))
         white_btn.grid(row=0, column=5)
         
-        purple_btn = Button(self, text="Фиолетовый", width=10, command=lambda: self.set_color("purple"))
-        purple_btn.grid(row=0, column=6)
+        purple_btn = Button(self, text="Фиолетовый", bg="purple", width=10, command=lambda: self.set_color("purple"))
+        purple_btn.grid(row=0, column=9)
 
-        silver_btn = Button(self, text="Серебряный", width=10, command=lambda: self.set_color("silver"))
+        silver_btn = Button(self, text="Серебряный", bg="silver", width=10, command=lambda: self.set_color("silver"))
         silver_btn.grid(row=0, column=7)
 
-        orange_btn = Button(self, text="Оранжевый", width=10, command=lambda: self.set_color("orange"))
-        orange_btn.grid(row=0, column=8)              
+        orange_btn = Button(self, text="Оранжевый", bg="orange", width=10, command=lambda: self.set_color("orange"))
+        orange_btn.grid(row=0, column=8)
+
+        chose_btn = Button(self, width=10, bg="turquoise", command=lambda: self.call_color_picker())
+        chose_btn.grid(row=0, column=5)
 
         # Создаем метку для кнопок изменения размера кисти
         size_lab = Label(self, text="Размер кисти: ")
         size_lab.grid(row=1, column=0, padx=5)
-        one_btn = Button(self, text="2x", width=10, command=lambda: self.set_brush_size(2))
+        one_btn = Button(self, text="2x", bg="green", width=10, command=lambda: self.set_brush_size(2))
         one_btn.grid(row=1, column=1)
 
-        two_btn = Button(self, text="5x", width=10, command=lambda: self.set_brush_size(5))
+        two_btn = Button(self, text="5x", bg="blue", width=10, command=lambda: self.set_brush_size(5))
         two_btn.grid(row=1, column=2)
 
-        five_btn = Button(self, text="7x", width=10, command=lambda: self.set_brush_size(7))
+        five_btn = Button(self, text="7x", bg="red", width=10, command=lambda: self.set_brush_size(7))
         five_btn.grid(row=1, column=3)
 
-        seven_btn = Button(self, text="10x", width=10, command=lambda: self.set_brush_size(10))
+        seven_btn = Button(self, text="10x", bg="white", width=10, command=lambda: self.set_brush_size(10))
         seven_btn.grid(row=1, column=4)
 
-        ten_btn = Button(self, text="20x", width=10, command=lambda: self.set_brush_size(20))
+        ten_btn = Button(self, text="20x", bg="purple", width=10, command=lambda: self.set_brush_size(20))
         ten_btn.grid(row=1, column=5)
 
-        twenty_btn = Button(self, text="50x", width=10, command=lambda: self.set_brush_size(50))
+        twenty_btn = Button(self, text="50x", bg="silver", width=10, command=lambda: self.set_brush_size(50))
         twenty_btn.grid(row=1, column=6, sticky=W)
 
-        thirty_btn = Button(self, text="100x", width=10, command=lambda: self.set_brush_size(100))
+        thirty_btn = Button(self, text="100x", bg="gold", width=10, command=lambda: self.set_brush_size(100))
         thirty_btn.grid(row=1, column=8, sticky=W)
 
-        fourty_btn = Button(self, text="1200x", width=10, command=lambda: self.set_brush_size(1200))
-        fourty_btn.grid(row=1, column=9, sticky=W)
+        fourty_btn = Button(self, text="1200x", bg="orange", width=10, command=lambda: self.set_brush_size(1200))
+        fourty_btn.grid(row=1, column=7, sticky=W)
 
         clear_btn = Button(self, text="Очистить", width=10, command=lambda: self.canv.delete("all"))
-        clear_btn.grid(row=0, column=7, sticky=W)
+        clear_btn.grid(row=0, column=10, sticky=W)
 
 # выход из программы  
 def close_win():
@@ -129,12 +136,12 @@ def about():
 
 def href():
   showinfo("Demo Paint", "Больше Информации: https://uk.wikipedia.org/wiki/Google_Cloud_Print")
-  
+
 # функция для создания главного окна
 def main():
     global root
     root = Tk()
-    root.geometry("1200x600+400+400")
+    root.geometry("650x600+400+400")
     app = Paint(root)
     m = Menu(root)
     root.config(menu=m)
